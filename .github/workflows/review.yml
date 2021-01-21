@@ -4,9 +4,8 @@ on: [pull_request]
 
 jobs:
 
-  review:
-
-    name: Terraform Code Review
+  terraform-fmt:
+    name: terraform fmt
 
     runs-on: ubuntu-latest
 
@@ -17,9 +16,8 @@ jobs:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-
       - name: Check out code
         uses: actions/checkout@v2
 
       - name: terraform fmt
-        uses: filiptepper/github-action@master
+        uses: filiptepper/github-action@main
