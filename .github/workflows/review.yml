@@ -46,4 +46,4 @@ jobs:
       - name: tflint
         uses: filiptepper/github-action-tflint@main
         with:
-          files: ${{ steps.modified-files.outputs.modified };k}
+          files: ${{ steps.modified-files.outputs.modified }}
