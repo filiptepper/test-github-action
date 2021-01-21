@@ -16,7 +16,7 @@ jobs:
       REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: Check out code
+      - name: checkout
         uses: actions/checkout@v2
 
       - name: terraform fmt
