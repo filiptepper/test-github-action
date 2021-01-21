@@ -4,23 +4,23 @@ on: [pull_request]
 
 jobs:
 
-  terraform-fmt:
-    name: terraform fmt
+  # terraform-fmt:
+  #   name: terraform fmt
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    container:
-      image: ghcr.io/filiptepper/checkcheckcheck:latest
+  #   container:
+  #     image: ghcr.io/filiptepper/checkcheckcheck:latest
 
-    env:
-      REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #   env:
+  #     REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    steps:
-      - name: checkout
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v2
 
-      - name: terraform fmt
-        uses: filiptepper/github-action@main
+  #     - name: terraform fmt
+  #       uses: filiptepper/github-action@main
 
   tflint:
     name: tflint
@@ -37,5 +37,13 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
+      - name: modified files
+        id: modified-files
+        uses: lots0logs/gh-action-get-changed-files@2.1.4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: tflint
         uses: filiptepper/github-action-tflint@main
+        with:
+          who-to-greet: ${{ steps.modified-files.outputs.modified }}
